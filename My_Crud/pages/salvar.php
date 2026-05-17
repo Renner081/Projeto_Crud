@@ -12,5 +12,5 @@ if($id) {
   $s = $pdo->prepare("INSERT INTO produtos (nome,categoria,quantidade,preco) VALUES(?,?,?,?)");
   $s->execute([$nome,$cat,$qty,$preco]);
 }
-header("Location: index.php");
+header("Location: index.php?msg=salvo");
 exit;

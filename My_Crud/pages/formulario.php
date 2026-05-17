@@ -29,7 +29,7 @@ if (isset($_GET['id'])) {
     <label>Preço:</label>
     <input type="number" name="preco" value="<?= $produto['preco'] ?>" step="0.01">
     <button type="submit">Salvar</button>
-    <button><a href="index.php">Cancelar</a></button>
+    <a href="index.php" class= "btn">Cancelar</a>
   </form>
   <script src="../assets/js/scripts.js"></script>
 </body>

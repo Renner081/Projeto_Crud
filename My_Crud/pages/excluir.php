@@ -5,5 +5,5 @@ if ($id > 0) {
   $s = $pdo->prepare("DELETE FROM produtos WHERE id=?");
   $s->execute([$id]);
 }
-header("Location: index.php");
+header("Location: index.php?msg=excluido");
 exit;
