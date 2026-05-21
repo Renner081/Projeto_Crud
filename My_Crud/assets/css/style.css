@@ -1,138 +1,240 @@
-/* =====================
-   GERAL — corpo da página
-   ===================== */
+/* ==========================================================================
+   1. VARIÁVEIS DE CORES E CONFIGURAÇÕES
+   ========================================================================== */
+:root {
+    --primary-color: #4f46e5;
+    --danger-color: #ef4444;
+    --danger-hover: #dc2626;
+    --success-color: #10b981;
+    --background-bg: #f8fafc;
+    --surface-white: #ffffff;
+    --text-main: #1e293b;
+    --text-muted: #64748b;
+    --border-color: #e2e8f0;
+    --radius: 10px;
+    --transition: all 0.25s ease;
+
+/* ==========================================================================
+   2. RESET CSS
+   ========================================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
-    font-family: inherit;
-    background: #f0f4ff;
-    padding: 2rem;
-    color: #333;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--background-bg);
+    color: var(--text-main);
+    line-height: 1.5;
+    padding: 2rem 1rem;
 }
 
-/* =====================
-   TÍTULO PRINCIPAL
-   ===================== */
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
 h1 {
-    margin-bottom: 1rem;
-    color: #4f46e5;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 1.5rem;
 }
 
-/* =====================
-   TABELA
-   ===================== */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    background: #fff;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, .1);
-}
-
-/* =====================
-   CÉLULAS DA TABELA
-   ===================== */
-th,
-td {
-    padding: 10px 14px;
-    border: 1px solid #ddd;
-    text-align: left;
-}
-
-/* =====================
-   CABEÇALHO DA TABELA
-   ===================== */
-th {
-    background: #4f46e5;
-    color: #fff;
-}
-
-/* =====================
-   LINKS GERAIS
-   ===================== */
-a {
-    color: white;
+/* ==========================================================================
+   3. BOTÕES E LINKS
+   ========================================================================== */
+button, .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1.2rem;
+    border-radius: var(--radius);
+    border: none;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
     text-decoration: none;
-    margin-right: 8px;
+    transition: var(--transition);
 }
 
-a:hover {
+.btn-primary {
+    background-color: var(--primary-color);
+    color: var(--surface-white);
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2);
+}
+
+.btn-deletar {
+    background: transparent;
+    color: var(--danger-color);
+    border: 1px solid var(--danger-color);
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn-deletar:hover {
+    background-color: var(--danger-color);
+    color: var(--surface-white);
+}
+
+.link-editar {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    margin-right: 12px;
+}
+
+.link-editar:hover {
     text-decoration: underline;
 }
 
-/* =====================
-   CÉLULAS — texto
-   ===================== */
-td {
-    color: #333;
+/* ==========================================================================
+   4. COMPONENTE: MODAL DE CONFIRMAÇÃO
+   ========================================================================== */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background-color: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(4px);
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 1rem;
 }
 
-/* =====================
-   LINKS DENTRO DAS CÉLULAS
-   ===================== */
-td a {
-    color: #000000;
-}
-
-td a:hover {
-    color: #0000006d;
-}
-
-/* =====================
-   INPUTS — base
-   ===================== */
-input {
-    display: flex;
-    margin: .5rem 0;
-    padding: .5rem .75rem;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    font-size: 14px;
+.modal-card {
+    background-color: var(--surface-white);
+    border-radius: 14px;
+    padding: 1.75rem;
     width: 100%;
-    transition: transform 0.2s ease,
-        background-color 0.3s ease,
-        box-shadow 0.3s ease;
+    max-width: 400px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    animation: scaleUp 0.2s ease-out;
 }
 
-/* =====================
-   BOTÕES E LINKS COM CLASSE .btn
-   ===================== */
-button, .btn {
-    display: inline-block;
-    margin: .5rem 0;
-    padding: .5rem .75rem;
-    border-radius: 6px;
-    border: none;
+.modal-title {
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--text-main);
+    margin-bottom: 0.5rem;
+}
+
+.modal-text {
     font-size: 14px;
-    width: auto;
-    background: #1a23cd;
-    color: #fff;
-    text-decoration: none;  /* para o <a class="btn"> não ficar sublinhado */
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+}
+
+.modal-buttons {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: flex-end;
+}
+
+.btn-cancelar {
+    background-color: var(--border-color);
+    color: var(--text-main);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    border: none;
     cursor: pointer;
-    transition: transform 0.2s ease,
-        background-color 0.3s ease,
-        box-shadow 0.3s ease;
+    font-weight: 500;
+    transition: var(--transition);
 }
 
-/* =====================
-   BOTÃO/LINK — ao passar o mouse
-   ===================== */
-button:hover, .btn:hover {
-    background: oklch(27.382% 0.17982 264.21);
-    transform: translateY(-3px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    color: #fff;  /* garante que o link não mude de cor */
+.btn-cancelar:hover {
+    background-color: #cbd5e1;
+}
+
+.btn-confirmar-exclusao {
+    background-color: var(--danger-color);
+    color: var(--surface-white);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
     text-decoration: none;
+    font-weight: 500;
+    transition: var(--transition);
 }
 
-/* =====================
-   BOTÃO/LINK — ao clicar
-   ===================== */
-.btn:active, .btn:active {
-    transform: scale(0.95);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+.btn-confirmar-exclusao:hover {
+    background-color: var(--danger-hover);
 }
 
+/* ==========================================================================
+   5. ANIMAÇÕES
+   ========================================================================== */
 @keyframes slideIn {
     from { opacity: 0; transform: translateX(60px); }
     to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes scaleUp {
+    from { opacity: 0; transform: scale(0.95); }
+    to   { opacity: 1; transform: scale(1); }
+}
+
+/* ==========================================================================
+   6. TABELA DE PRODUTOS
+   ========================================================================== */
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    background-color: var(--surface-white);
+    border-radius: var(--radius);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    margin-top: 1.5rem;
+    border: 1px solid var(--border-color);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 14px;
+}
+
+th {
+    background-color: #eceff1;
+    color: var(--text-muted);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    padding: 1rem 1.5rem;
+    border-bottom: 2px solid var(--border-color);
+}
+
+td {
+    padding: 1rem 1.5rem;
+    color: var(--text-main);
+    border-bottom: 1px solid var(--border-color);
+    vertical-align: middle;
+}
+
+tbody tr:hover {
+    background-color: #f1f5f9;
+    transition:
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+
+.acoes {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 }
