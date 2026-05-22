@@ -1,5 +1,5 @@
 // =====================
-// 1. TOAST — aviso visual
+// 1. TOAST — aviso visual que some sozinho
 // =====================
 function toast(msg, tipo) {
     const div = document.createElement('div');
@@ -16,6 +16,7 @@ function toast(msg, tipo) {
         z-index: 999;
         background: ${tipo === 'success' ? '#10b981' : '#ef4444'};
         animation: slideIn .3s ease;
+        box-shadow: 0 4px 12px rgba(0,0,0,.15);
     `;
     document.body.appendChild(div);
     setTimeout(() => div.remove(), 3000);
@@ -37,7 +38,7 @@ function fecharModal() {
 // =====================
 // 3. LOADING — botão de salvar
 // =====================
-document.querySelector('form')?.addEventListener('submit', function(e) {
+document.querySelector('form')?.addEventListener('submit', function (e) {
     const nome = document.querySelector('[name="nome"]')?.value.trim();
     if (!nome) {
         alert('⚠️ Informe o nome do produto!');
