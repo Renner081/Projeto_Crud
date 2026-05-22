@@ -35,11 +35,15 @@ function fecharModal() {
     document.getElementById('overlay').style.display = 'none';
 }
 
-// =====================
-// 3. LOADING — botão de salvar
-// =====================
+// 3. LOADING — botão de salvar (só no formulario.php)
 document.querySelector('form')?.addEventListener('submit', function (e) {
-    const nome = document.querySelector('[name="nome"]')?.value.trim();
+    // Verifica se é o formulário de produto (tem o campo "nome")
+    const campoNome = document.querySelector('[name="nome"]');
+    
+    // Se não tiver campo nome é login/cadastro — não valida aqui
+    if (!campoNome) return;
+
+    const nome = campoNome.value.trim();
     if (!nome) {
         alert('⚠️ Informe o nome do produto!');
         e.preventDefault();
