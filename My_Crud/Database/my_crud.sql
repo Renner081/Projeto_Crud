@@ -44,6 +44,10 @@ CREATE TABLE `usuarios` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+ALTER TABLE `produtos`
+  ADD COLUMN `usuario_id` int(11) DEFAULT NULL,
+  ADD FOREIGN KEY (`usuario_id`) REFERENCES `usuarios`(`id`);
+
 
 --
 -- Índices para tabelas despejadas
